@@ -1,0 +1,1 @@
+{"version":1,"actualizado":"2026-10-20T19:35:56.035Z","equipo":"","datos":{"info":[],"activos":[],"programados":[],"historial":[],"planificados":[],"cotamil":null,"contingencia":null,"config":{"rotationSeconds":14,"alarms":[{"id":"a1","hour":3,"type":"distinct","mode":"continuous"},{"id":"a2","hour":4,"type":"persistent","mode":"continuous"}]},"planMeta":null}}
