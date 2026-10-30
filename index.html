@@ -197,35 +197,33 @@ h1,h2,h3,.condensed{font-family:'Barlow Condensed',sans-serif}
   background:linear-gradient(90deg,var(--aa-blue),var(--aa-blue-lt)); color:#fff; flex:0 0 auto;
 }
 .slide-head.head-cal{background:linear-gradient(90deg,#9b1c1c,#d9642f)}
-.cal-grid{height:100%; display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:.6vw; padding:1.2vh 1.2vw 3vh}
-.cal-col{background:#f6f9fc; border:1px solid var(--line); border-radius:10px; display:flex; flex-direction:column; min-height:0; overflow:hidden; container-type:inline-size}
-.cal-col.cal-hoy{border:2px solid var(--danger); background:#fff8f7}
-.cal-col.cal-fuera{opacity:.4}
+.cal-grid{height:100%; display:flex; flex-direction:column; gap:.7vh; padding:1.2vh 1.2vw 3vh}
+.cal-row{display:flex; flex:0 1 auto; min-height:7.5vh; max-height:30vh; background:#f6f9fc; border:1px solid var(--line); border-radius:10px; overflow:hidden}
+.cal-row.cal-hoy{border:2px solid var(--danger); background:#fff8f7}
+.cal-row.cal-fuera{opacity:.4}
+.cal-row-hd{flex:0 0 9vw; background:#e9eff5; padding:.6vh .7vw; font-family:'Barlow Condensed',sans-serif; font-weight:700; color:var(--ink); display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:.3vh}
+.cal-hoy .cal-row-hd{background:var(--danger); color:#fff}
+.cal-dn{font-size:2.3vh; text-transform:uppercase; line-height:1}
+.cal-dd{font-size:2vh; opacity:.85; line-height:1}
 .cal-fuera .cal-dd{display:none}
-.cal-col-hd{background:#e9eff5; padding:.7vh .6vw; font-family:'Barlow Condensed',sans-serif; font-weight:700; color:var(--ink); display:flex; align-items:center; gap:.4vw; flex-wrap:wrap}
-.cal-hoy .cal-col-hd{background:var(--danger); color:#fff}
-.cal-dn{font-size:2vh; text-transform:uppercase}
-.cal-dd{font-size:1.8vh; opacity:.85}
-.cal-badge{margin-left:auto; background:#fff; color:var(--danger); border-radius:8px; padding:.1vh .6vh; font-size:1.2vh; font-weight:800}
+.cal-badge{background:#fff; color:var(--danger); border-radius:8px; padding:.1vh .6vh; font-size:1.3vh; font-weight:800}
 .cal-badge-m{background:var(--aa-blue); color:#fff}
-.cal-col-body{flex:1; min-height:0; overflow:hidden; padding:.7vh .5vw; display:flex; flex-direction:column; gap:1vh}
-.cal-item{background:#fff; border:1px solid var(--line); border-left:5px solid var(--aa-blue); border-radius:8px; padding:.9vh .7vw; color:var(--ink)}
+.cal-more{font-size:1.35vh; font-weight:800; color:var(--aa-blue); background:#fff; border-radius:8px; padding:.1vh .6vh}
+.cal-hoy .cal-more{color:var(--danger)}
+.cal-row-body{flex:1; min-width:0; min-height:0; overflow:hidden; padding:.6vh .6vw; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.6vw; align-items:stretch; align-content:center}
+.cal-item{background:#fff; border:1px solid var(--line); border-left:5px solid var(--aa-blue); border-radius:8px; padding:.7vh .7vw; color:var(--ink); min-height:0; overflow:hidden}
 .cal-item.cal-activo{border-left-color:var(--danger); background:#fdeeee}
 .cal-item.cal-programado{border-left-color:var(--ok); background:#eef8f1}
 .cal-item.cal-planificado{border-left-color:var(--aa-blue)}
 .cal-top{display:flex; justify-content:space-between; align-items:baseline; gap:.3vw; flex-wrap:wrap}
 .cal-hora{font-family:'Barlow Condensed',sans-serif; font-size:2.4vh; font-weight:800; white-space:nowrap}
 .cal-tag{font-size:1.25vh; color:var(--muted); font-weight:700; white-space:nowrap}
-.cal-dir{font-size:1.85vh; font-weight:800; line-height:1.15; margin-top:.2vh; overflow-wrap:anywhere; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden}
+.cal-dir{font-size:1.85vh; font-weight:800; line-height:1.15; margin-top:.2vh; overflow-wrap:anywhere; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
 .cal-com{font-size:1.55vh; color:var(--aa-blue); font-weight:700; margin-top:.15vh}
 .cal-com b{color:var(--danger)}
 .cal-ito{font-size:1.55vh; font-weight:600; margin-top:.15vh}
-.cal-obs{font-size:1.4vh; color:var(--muted); margin-top:.2vh; line-height:1.2; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden}
-.cal-empty{color:#9aa7b4; font-size:1.3vh; text-align:center; margin-top:1vh}
-.cal-more{font-size:1.3vh; font-weight:800; color:var(--aa-blue); text-align:center}
-@container (max-width: 170px){
-  .cal-tag{display:none}
-  .cal-obs{-webkit-line-clamp:2}
+.cal-obs{font-size:1.4vh; color:var(--muted); margin-top:.2vh; line-height:1.2; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
+.cal-empty{grid-column:1/-1; align-self:center; color:#9aa7b4; font-size:1.5vh}
 }
 .slide-head.head-int{background:linear-gradient(90deg,var(--aa-green),var(--aa-green-lt))}
 .slide-head h2{font-size:2.6vh; font-weight:700; letter-spacing:.01em}
@@ -3685,6 +3683,16 @@ function _plHoras(v){
   const m = String(v||'').replace(',', '.').match(/(\d+(?:\.\d+)?)\s*(h|hr|hrs|hora|horas)\b/i);
   return m ? parseFloat(m[1]) : null;
 }
+/* DURACION CORTE: número de horas (7), fracción de día en formato hora (0,29 = 07:00), "7:00" o "7 horas" */
+function _plHorasDur(v){
+  if(v==null || v==='') return null;
+  if(typeof v==='number' && isFinite(v) && v>0) return v<1 ? Math.round(v*24*60)/60 : v;
+  const s = String(v).trim();
+  const hm = s.match(/^(\d{1,2}):(\d{2})/);
+  if(hm) return +hm[1] + (+hm[2])/60;
+  const n = parseFloat(s.replace(',', '.'));
+  return (isFinite(n) && n>0) ? n : _plHoras(s);
+}
 const _PL_COMUNAS = ['Talagante','El Monte','Isla de Maipo','Peñaflor','Padre Hurtado','Melipilla','Buin','Paine','Calera de Tango'];
 function _plComuna(v){
   const n = _plNorm(v); if(!n) return '';
@@ -3730,7 +3738,7 @@ function parsePlanificadosSheet(rows){
       warnings.push('Sin hora de inicio: se asumió '+String(PLAN_HORA_DEFECTO).padStart(2,'0')+':00');
     }
     if(!ini) warnings.push('Sin FECHA INICIO: queda en "Sin fecha" hasta completarla');
-    const horas = _plHoras(get(r,'tCorte'));
+    const horas = _plHoras(get(r,'tCorte')) || _plHorasDur(get(r,'dur'));
     let rep = _plDate(get(r,'rep'));
     let fin = null;
     if(ini){
@@ -3741,7 +3749,7 @@ function parsePlanificadosSheet(rows){
         else { fin = horas ? new Date(ini.getTime()+horas*3600e3) : null; warnings.push('⚠ FECHA REPOSICIÓN ('+_plFmtFecha(rep)+') no calza con el inicio'+(horas?': se usó TIEMPO DE CORTE ('+horas+' h)':'')); }
       }
       else if(rep){ fin = horas ? new Date(ini.getTime()+horas*3600e3) : null; warnings.push('⚠ FECHA REPOSICIÓN ('+_plFmtFecha(rep)+') no calza con el inicio'+(horas?': se usó TIEMPO DE CORTE ('+horas+' h)':'')); }
-      else if(horas){ fin = new Date(ini.getTime()+horas*3600e3); warnings.push('Sin FECHA REPOSICIÓN: se calculó con TIEMPO DE CORTE ('+horas+' h)'); }
+      else if(horas){ fin = new Date(ini.getTime()+horas*3600e3); warnings.push('Sin FECHA REPOSICIÓN: término calculado con la duración del corte ('+horas+' h)'); }
     }
     const motivo = _plStr(get(r,'motivo'));
     const solicitante = _plStr(get(r,'solicitante'));
@@ -4015,7 +4023,7 @@ function renderCalendarioSlide(def){
   const wk = def.week, now = Date.now(), today = _calStartOfDay(now);
   const fmtH = ts=>{ if(!ts) return ''; const d = new Date(ts); return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); };
   const dayNames = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
-  let cols = '', tpl = [];
+  let rows = '';
   for(let d=0; d<7; d++){
     const dayTs = wk.start + d*86400e3;
     const dd = new Date(dayTs);
@@ -4023,7 +4031,8 @@ function renderCalendarioSlide(def){
     const esHoy = dayTs===today;
     const esManana = dayTs===today+86400e3;
     const its = wk.items.filter(it=>it.dia===dayTs);
-    tpl.push(fuera ? '0.45fr' : (its.length ? '1.7fr' : '0.75fr'));
+    if(d>=5 && !its.length) continue;   // sábado y domingo solo si tienen algún corte
+    if(fuera && !its.length) continue;  // días ya pasados o fuera de los 14 días: no ocupan fila
     let cards = its.slice(0, CAL_MAX_POR_DIA).map(it=>{
       const tag = it.tipo==='activo' ? '🔴 En curso' : (it.tipo==='programado' ? '🟢 Programado' : '📅 Planificado');
       const horario = it.tipo==='activo' ? 'Desde '+fmtH(it.ini)+(_calStartOfDay(it.ini)<today?' ('+new Date(it.ini).toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit'})+')':'') : fmtH(it.ini)+(it.fin?' – '+fmtH(it.fin):'');
@@ -4035,14 +4044,15 @@ function renderCalendarioSlide(def){
         (it.obs?'<div class="cal-obs">'+escapeHtml(it.obs)+'</div>':'')+
       '</div>';
     }).join('');
-    if(its.length > CAL_MAX_POR_DIA) cards += '<div class="cal-more">+'+(its.length-CAL_MAX_POR_DIA)+' corte(s) más</div>';
     if(!its.length) cards = fuera ? '' : '<div class="cal-empty">Sin cortes</div>';
-    cols += '<div class="cal-col'+(esHoy?' cal-hoy':'')+(fuera?' cal-fuera':'')+'">'+
-      '<div class="cal-col-hd"><span class="cal-dn">'+dayNames[d]+'</span> <span class="cal-dd">'+String(dd.getDate()).padStart(2,'0')+'/'+String(dd.getMonth()+1).padStart(2,'0')+'</span>'+
-        (esHoy?'<span class="cal-badge">HOY</span>':(esManana?'<span class="cal-badge cal-badge-m">MAÑANA</span>':''))+'</div>'+
-      '<div class="cal-col-body">'+cards+'</div></div>';
+    const more = its.length > CAL_MAX_POR_DIA ? '<span class="cal-more">+'+(its.length-CAL_MAX_POR_DIA)+' más</span>' : '';
+    rows += '<div class="cal-row'+(esHoy?' cal-hoy':'')+(fuera?' cal-fuera':'')+'">'+
+      '<div class="cal-row-hd"><span class="cal-dn">'+dayNames[d]+'</span><span class="cal-dd">'+String(dd.getDate()).padStart(2,'0')+'/'+String(dd.getMonth()+1).padStart(2,'0')+'</span>'+
+        (esHoy?'<span class="cal-badge">HOY</span>':(esManana?'<span class="cal-badge cal-badge-m">MAÑANA</span>':''))+more+'</div>'+
+      '<div class="cal-row-body">'+cards+'</div></div>';
   }
-  const wEnd = new Date(wk.start + 6*86400e3);
+  const finde = wk.items.some(it=>it.dia >= wk.start+5*86400e3);
+  const wEnd = new Date(wk.start + (finde?6:4)*86400e3);
   const rango = new Date(wk.start).toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit'})+' al '+wEnd.toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit'});
   const nAct = wk.items.filter(i=>i.tipo==='activo').length;
   const nProx = wk.items.length - nAct;
@@ -4050,7 +4060,7 @@ function renderCalendarioSlide(def){
   return '<div class="slide-head head-cal"><div><h2>Calendario de cortes · '+rango+pageTag+'</h2>'+
     '<div class="meta">'+(nAct?nAct+' en curso · ':'')+nProx+' próximo(s) · 🔴 En curso · 🟢 Programado · 📅 Planificado (Excel)</div></div>'+
     '<div class="chip">Próximos '+CAL_DIAS+' días</div></div>'+
-    '<div class="slide-body"><div class="cal-grid" style="grid-template-columns:'+tpl.map(t=>'minmax(0,'+t+')').join(' ')+'">'+cols+'</div></div>';
+    '<div class="slide-body"><div class="cal-grid">'+rows+'</div></div>';
 }
 
 /* Actualiza el calendario solo si cambió su contenido (evita parpadeos en la rotación) */
